@@ -14,14 +14,19 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: 'https://demo.playwright.dev/todomvc', // Define a tua URL base aqui
-    trace: 'on-first-retry',                       // Grava o "trace" (caixa negra) se falhar
-    screenshot: 'only-on-failure',                 // Tira print apenas se houver erro
-    video: 'retain-on-failure',                    // Grava vídeo apenas se houver erro
-    
-    // Configuração de dispositivos (Locators funcionam melhor com viewports fixos)
-    viewport: { width: 1280, height: 720 },
-  },
+    ignoreHTTPSErrors: true, 
+    launchOptions: {
+    // Isto força o Chrome a ignorar todas as políticas de segurança de rede
+    args: [
+      '--ignore-certificate-errors',
+      '--ignore-ssl-errors',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+    ]
+  }
+    },
+  
 
   /* Configuração de Browsers */
   projects: [
